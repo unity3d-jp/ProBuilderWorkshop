@@ -1,2 +1,0 @@
-# ProBuilderWorkshop
-ProBuilderを使ったワークショップ用

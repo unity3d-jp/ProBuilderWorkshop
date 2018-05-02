@@ -1,0 +1,290 @@
+fileFormatVersion: 2
+guid: b27b5531d95ac49a99a1bd92ec02a19e
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: arms
+    100002: body
+    100004: body_2
+    100006: bouquet
+    100008: center
+    100010: center_2
+    100012: Crown
+    100014: elbow_L
+    100016: elbow_R
+    100018: flower
+    100020: flower_01
+    100022: flower_02
+    100024: hand_L
+    100026: hand_R
+    100028: head
+    100030: head_2
+    100032: hip
+    100034: leaf
+    100036: leaf_2
+    100038: leg
+    100040: leg_2
+    100042: mesh
+    100044: neck
+    100046: petal
+    100048: petal_2
+    100050: //RootNode
+    100052: rig
+    100054: Shoes_
+    100056: shoulder_L
+    100058: shoulder_R
+    100060: stalk
+    100062: stalk_2
+    100064: west
+    100066: wrist_L
+    100068: wrist_R
+    400000: arms
+    400002: body
+    400004: body_2
+    400006: bouquet
+    400008: center
+    400010: center_2
+    400012: Crown
+    400014: elbow_L
+    400016: elbow_R
+    400018: flower
+    400020: flower_01
+    400022: flower_02
+    400024: hand_L
+    400026: hand_R
+    400028: head
+    400030: head_2
+    400032: hip
+    400034: leaf
+    400036: leaf_2
+    400038: leg
+    400040: leg_2
+    400042: mesh
+    400044: neck
+    400046: petal
+    400048: petal_2
+    400050: //RootNode
+    400052: rig
+    400054: Shoes_
+    400056: shoulder_L
+    400058: shoulder_R
+    400060: stalk
+    400062: stalk_2
+    400064: west
+    400066: wrist_L
+    400068: wrist_R
+    2100000: flower
+    2100002: flower_yellow
+    2100004: flower_blue
+    2100006: flower_green
+    2100008: flower_red
+    2100010: princess
+    2300000: bouquet
+    2300002: center
+    2300004: center_2
+    2300006: leaf
+    2300008: leaf_2
+    2300010: petal
+    2300012: petal_2
+    2300014: stalk
+    2300016: stalk_2
+    3300000: bouquet
+    3300002: center
+    3300004: center_2
+    3300006: leaf
+    3300008: leaf_2
+    3300010: petal
+    3300012: petal_2
+    3300014: stalk
+    3300016: stalk_2
+    4300000: bouquet
+    4300002: center
+    4300004: petal
+    4300006: leaf
+    4300008: stalk
+    4300010: center_2
+    4300012: petal_2
+    4300014: leaf_2
+    4300016: stalk_2
+    4300018: Crown
+    4300020: head
+    4300022: leg_2
+    4300024: Shoes_
+    4300026: body_2
+    4300028: arms
+    7400000: Walk
+    7400002: Give Flowers
+    9500000: //RootNode
+    13700000: arms
+    13700002: body_2
+    13700004: Crown
+    13700006: head
+    13700008: leg_2
+    13700010: Shoes_
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: flower
+    second: {fileID: 2100000, guid: bb93b69eb02714188858eb4e5e4e4f53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: flower_blue
+    second: {fileID: 2100000, guid: 46bd44aefc9304ccab46de1331a86d3d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: flower_green
+    second: {fileID: 2100000, guid: 1bd283c7bcbb04e4fa8520cf622061f5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: flower_red
+    second: {fileID: 2100000, guid: 9fce6ad57535749d9bd206d0b2b4a7fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: flower_yellow
+    second: {fileID: 2100000, guid: 4afe91e01a3d047efa0a6f550391ca7a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: princess
+    second: {fileID: 2100000, guid: 83cb094b4fbe845eaadc1be4c8757de9, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Walk
+      takeName: CINEMA_4D_Main
+      firstFrame: 10
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Give Flowers
+      takeName: CINEMA_4D_Main
+      firstFrame: 50
+      lastFrame: 80
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.3
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
