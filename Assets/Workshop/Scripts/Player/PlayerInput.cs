@@ -9,9 +9,12 @@ namespace PlayerLocomotion
     public class PlayerInput : MonoBehaviour
     {
         [SerializeField]
+        OSType buildOS = OSType.Win; //ビルドするUnity(このUnity)のOS
+
+        [SerializeField]
         CinemachineFreeLook freeLookCamera;
+        OSType osType = OSType.Other; //ターゲットとなるOS
         ControllerType controllerType = ControllerType.Other;
-        OSType osType = OSType.Other;
 
         public enum ControllerType
         {
@@ -120,11 +123,34 @@ namespace PlayerLocomotion
             if (controllerType == ControllerType.Other) return;
             if (osType == OSType.Other) return;
 
-            InputManager.RegisterInputEvent("Sprint " + controllerType, InputPhase.Press, playerController.StartSprinting);
-            InputManager.RegisterInputEvent("Sprint " + controllerType, InputPhase.Release, playerController.StopSprinting);
-            InputManager.RegisterInputEvent("Jump " + controllerType, InputPhase.Press, playerController.JumpStart);
-            InputManager.RegisterInputEvent("Jump " + controllerType, InputPhase.Hold, playerController.Jumping);
-            InputManager.RegisterInputEvent("Jump " + controllerType, InputPhase.Release, playerController.JumpEnd);
+            //WebGLのときのみキーアサインは特殊仕様になる
+            if (Application.platform == RuntimePlatform.WebGLPlayer)
+            {
+                if (osType == OSType.Win)
+                {
+                    InputManager.RegisterInputEvent("Sprint GL Xbox", InputPhase.Press, playerController.StartSprinting);
+                    InputManager.RegisterInputEvent("Sprint GL Xbox", InputPhase.Release, playerController.StopSprinting);
+                    InputManager.RegisterInputEvent("Jump GL Xbox", InputPhase.Press, playerController.JumpStart);
+                    InputManager.RegisterInputEvent("Jump GL Xbox", InputPhase.Hold, playerController.Jumping);
+                    InputManager.RegisterInputEvent("Jump GL Xbox", InputPhase.Release, playerController.JumpEnd);
+                }
+                else if (osType == OSType.Mac)
+                {
+                    InputManager.RegisterInputEvent("Sprint GL PS4", InputPhase.Press, playerController.StartSprinting);
+                    InputManager.RegisterInputEvent("Sprint GL PS4", InputPhase.Release, playerController.StopSprinting);
+                    InputManager.RegisterInputEvent("Jump GL PS4", InputPhase.Press, playerController.JumpStart);
+                    InputManager.RegisterInputEvent("Jump GL PS4", InputPhase.Hold, playerController.Jumping);
+                    InputManager.RegisterInputEvent("Jump GL PS4", InputPhase.Release, playerController.JumpEnd);
+                }
+            }
+            else
+            {
+                InputManager.RegisterInputEvent("Sprint " + controllerType, InputPhase.Press, playerController.StartSprinting);
+                InputManager.RegisterInputEvent("Sprint " + controllerType, InputPhase.Release, playerController.StopSprinting);
+                InputManager.RegisterInputEvent("Jump " + controllerType, InputPhase.Press, playerController.JumpStart);
+                InputManager.RegisterInputEvent("Jump " + controllerType, InputPhase.Hold, playerController.Jumping);
+                InputManager.RegisterInputEvent("Jump " + controllerType, InputPhase.Release, playerController.JumpEnd);
+            }
         }
 
         // FreelookCameraの設定
@@ -134,8 +160,58 @@ namespace PlayerLocomotion
             if (controllerType == ControllerType.Other) return;
             if (osType == OSType.Other) return;
 
-            freeLookCamera.m_XAxis.m_InputAxisName = "Right Stick Horizontal " + osType + " " + controllerType;
-            freeLookCamera.m_YAxis.m_InputAxisName = "Right Stick Vertical " + osType + " " + controllerType;
+            if (Application.platform != RuntimePlatform.WebGLPlayer)
+            {
+                if (osType == OSType.Win)
+                {
+                    if (controllerType == ControllerType.Xbox)
+                    {
+                        freeLookCamera.m_XAxis.m_InputAxisName = "Right Stick Horizontal 4-5";
+                        freeLookCamera.m_YAxis.m_InputAxisName = "Right Stick Vertical 4-5";
+                    }
+                    else if (controllerType == ControllerType.PS4)
+                    {
+                        freeLookCamera.m_XAxis.m_InputAxisName = "Right Stick Horizontal 3-6";
+                        freeLookCamera.m_YAxis.m_InputAxisName = "Right Stick Vertical 3-6";
+                    }
+
+                }
+                else if (osType == OSType.Mac)
+                {
+                    freeLookCamera.m_XAxis.m_InputAxisName = "Right Stick Horizontal 3-4";
+                    freeLookCamera.m_YAxis.m_InputAxisName = "Right Stick Vertical 3-4";
+                }
+            }
+            //WebGL書き出しの場合、ビルドするUnityエディタがWindowsかMacかでキーアサインが変わる
+            else
+            {
+                if (buildOS == OSType.Win)
+                {
+                    if (controllerType == ControllerType.Xbox)
+                    {
+                        freeLookCamera.m_XAxis.m_InputAxisName = "Right Stick Horizontal 4-5";
+                        freeLookCamera.m_YAxis.m_InputAxisName = "Right Stick Vertical 4-5";
+                    }
+                    else if (controllerType == ControllerType.PS4)
+                    {
+                        freeLookCamera.m_XAxis.m_InputAxisName = "Right Stick Horizontal 3-6";
+                        freeLookCamera.m_YAxis.m_InputAxisName = "Right Stick Vertical 3-6";
+                    }
+                }
+                else if (buildOS == OSType.Mac)
+                {
+                    if (osType == OSType.Win && controllerType == ControllerType.PS4)
+                    {
+                        freeLookCamera.m_XAxis.m_InputAxisName = "Right Stick Horizontal 3-6";
+                        freeLookCamera.m_YAxis.m_InputAxisName = "Right Stick Vertical 3-6";
+                    }
+                    else if (osType == OSType.Mac)
+                    {
+                        freeLookCamera.m_XAxis.m_InputAxisName = "Right Stick Horizontal 4-5";
+                        freeLookCamera.m_YAxis.m_InputAxisName = "Right Stick Vertical 4-5";
+                    }
+                }
+            }
         }
     }
 }
