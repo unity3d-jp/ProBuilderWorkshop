@@ -246,7 +246,7 @@ InputManager:
     axis: 3
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Right Stick Vertical Win  Xbox
+    m_Name: Right Stick Vertical Win Xbox
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -311,7 +311,15 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Right Stick Vertical Win Xbox
-    descriptiveName: 
+    descriptiveName: '
+
+      UnityEngine.Debug:Log(Object)
+
+      PlayerLocomotion.PlayerInput:SetFreelookCamera() (at Assets/Workshop/Scripts/Player/PlayerInput.cs:132)
+
+      PlayerLocomotion.PlayerInput:Start() (at Assets/Workshop/Scripts/Player/PlayerInput.cs:116)
+
+'
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -487,6 +495,22 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Right Stick Vertical Mac PS4
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0
+    sensitivity: 0.1
+    snap: 0
+    invert: 0
+    type: 1
+    axis: 1
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Submit
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 

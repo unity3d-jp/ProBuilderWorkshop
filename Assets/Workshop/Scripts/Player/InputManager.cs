@@ -28,7 +28,15 @@ namespace PlayerLocomotion
 
         private static List<InputEvent> inputEventList;
 
-        public static void RegisterKeyEvent(string name, InputPhase phase, InputDelegate method)
+        public static void ClearInputEvent()
+        {
+            if (inputEventList != null)
+            {
+                inputEventList = new List<InputEvent>();
+            }
+        }
+
+        public static void RegisterInputEvent(string name, InputPhase phase, InputDelegate method)
         {
             if (inputEventList == null)
             {
@@ -44,6 +52,8 @@ namespace PlayerLocomotion
 
         public static void UpdateState()
         {
+            if (inputEventList == null) return;
+
             foreach (InputEvent e in inputEventList)
             {
                 switch (e.phase)

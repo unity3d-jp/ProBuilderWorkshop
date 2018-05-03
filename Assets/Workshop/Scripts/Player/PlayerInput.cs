@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using Cinemachine;
+using System.Collections;
 
 namespace PlayerLocomotion
 {
@@ -8,13 +10,17 @@ namespace PlayerLocomotion
     {
         [SerializeField]
         CinemachineFreeLook freeLookCamera;
-
-        [SerializeField]
-        ControllerType controllerType;
+        ControllerType controllerType = ControllerType.Other;
+        OSType osType = OSType.Other;
 
         public enum ControllerType
         {
-            Xbox, PS4
+            Xbox, PS4, Other
+        }
+
+        public enum OSType
+        {
+            Mac, Win, Other
         }
 
         private PlayerController m_PlayerController;
@@ -27,44 +33,60 @@ namespace PlayerLocomotion
             }
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
-            // ダッシュの設定
-            InputManager.RegisterKeyEvent("Sprint", InputPhase.Press, playerController.StartSprinting);
-            InputManager.RegisterKeyEvent("Sprint", InputPhase.Release, playerController.StopSprinting);
-
-            // ジャンプの設定
-            InputManager.RegisterKeyEvent("Jump", InputPhase.Press, playerController.JumpStart);
-            InputManager.RegisterKeyEvent("Jump", InputPhase.Hold, playerController.Jumping);
-            InputManager.RegisterKeyEvent("Jump", InputPhase.Release, playerController.JumpEnd);
-
-            switch (controllerType)
+            while (true)
             {
-                case ControllerType.Xbox:
-                    // ダッシュの設定
-                    InputManager.RegisterKeyEvent("Sprint Xbox", InputPhase.Press, playerController.StartSprinting);
-                    InputManager.RegisterKeyEvent("Sprint Xbox", InputPhase.Release, playerController.StopSprinting);
+                var joystickNames = Input.GetJoystickNames();
 
-                    // ジャンプの設定
-                    InputManager.RegisterKeyEvent("Jump Xbox", InputPhase.Press, playerController.JumpStart);
-                    InputManager.RegisterKeyEvent("Jump Xbox", InputPhase.Hold, playerController.Jumping);
-                    InputManager.RegisterKeyEvent("Jump Xbox", InputPhase.Release, playerController.JumpEnd);
-                    break;
+                for (int i = 0; i < joystickNames.Length; i++)
+                {
+                    //Debug.LogFormat("{0} {1}", i, joystickNames);
 
-                case ControllerType.PS4:
-                    // ダッシュの設定
-                    InputManager.RegisterKeyEvent("Sprint PS4", InputPhase.Press, playerController.StartSprinting);
-                    InputManager.RegisterKeyEvent("Sprint PS4", InputPhase.Release, playerController.StopSprinting);
+                    var joystickName = joystickNames[i];
 
-                    // ジャンプの設定
-                    InputManager.RegisterKeyEvent("Jump PS4", InputPhase.Press, playerController.JumpStart);
-                    InputManager.RegisterKeyEvent("Jump PS4", InputPhase.Hold, playerController.Jumping);
-                    InputManager.RegisterKeyEvent("Jump PS4", InputPhase.Release, playerController.JumpEnd);
-                    break;
+                    if (joystickName == "")
+                    {
+                        continue;
+                    }
+                    else if (joystickName.Contains("Xbox") || joystickName.Contains("XBOX") || joystickName.Contains("xinput"))
+                    {
+                        controllerType = ControllerType.Xbox;
+                        break;
+                    }
+                    else if (joystickName.Contains("Wireless Controller"))
+                    {
+                        controllerType = ControllerType.PS4;
+                        break;
+                    }
+                    else
+                    {
+                        controllerType = ControllerType.Other;
+                        break;
+                    }
+                }
+
+                if (SystemInfo.operatingSystem.Contains("Windows"))
+                {
+                    osType = OSType.Win;
+                }
+                else if (SystemInfo.operatingSystem.Contains("Mac"))
+                {
+                    osType = OSType.Mac;
+                }
+                else
+                {
+                    osType = OSType.Other;
+                }
+
+                ClearInputEvent();
+                SetKeyboard();
+                SetGamepad();
+                SetFreelookCamera();
+
+                yield return new WaitForSeconds(1f);
             }
 
-            // FreelookCameraの設定
-            SetFreelookCamera();
         }
 
         private void Update()
@@ -76,40 +98,44 @@ namespace PlayerLocomotion
             playerController.SetHorizontalVelocity(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         }
 
+        // キーボードの設定
+        private void ClearInputEvent()
+        {
+            InputManager.ClearInputEvent();
+        }
+
+        // キーボードの設定
+        private void SetKeyboard()
+        {
+            InputManager.RegisterInputEvent("Sprint", InputPhase.Press, playerController.StartSprinting);
+            InputManager.RegisterInputEvent("Sprint", InputPhase.Release, playerController.StopSprinting);
+            InputManager.RegisterInputEvent("Jump", InputPhase.Press, playerController.JumpStart);
+            InputManager.RegisterInputEvent("Jump", InputPhase.Hold, playerController.Jumping);
+            InputManager.RegisterInputEvent("Jump", InputPhase.Release, playerController.JumpEnd);
+        }
+
+        // ゲームパッドの設定
+        private void SetGamepad()
+        {
+            if (controllerType == ControllerType.Other) return;
+            if (osType == OSType.Other) return;
+
+            InputManager.RegisterInputEvent("Sprint " + controllerType, InputPhase.Press, playerController.StartSprinting);
+            InputManager.RegisterInputEvent("Sprint " + controllerType, InputPhase.Release, playerController.StopSprinting);
+            InputManager.RegisterInputEvent("Jump " + controllerType, InputPhase.Press, playerController.JumpStart);
+            InputManager.RegisterInputEvent("Jump " + controllerType, InputPhase.Hold, playerController.Jumping);
+            InputManager.RegisterInputEvent("Jump " + controllerType, InputPhase.Release, playerController.JumpEnd);
+        }
+
+        // FreelookCameraの設定
         private void SetFreelookCamera()
         {
             if (!freeLookCamera) return;
+            if (controllerType == ControllerType.Other) return;
+            if (osType == OSType.Other) return;
 
-#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-
-            switch (controllerType)
-            {
-                case ControllerType.Xbox:
-                    freeLookCamera.m_XAxis.m_InputAxisName = "Right Stick Horizontal Win Xbox";
-                    freeLookCamera.m_YAxis.m_InputAxisName = "Right Stick Vertical Win Xbox";
-                    break;
-
-                case ControllerType.PS4:
-                    freeLookCamera.m_XAxis.m_InputAxisName = "Right Stick Horizontal Win PS4";
-                    freeLookCamera.m_YAxis.m_InputAxisName = "Right Stick Vertical Win PS4";
-                    break;
-            }
-
-
-#elif UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
-            switch (controllerType)
-            {
-                case ControllerType.Xbox:
-                    freeLookCamera.m_XAxis.m_InputAxisName = "Right Stick Horizontal Mac Xbox";
-	            	freeLookCamera.m_YAxis.m_InputAxisName = "Right Stick Vertical Mac Xbox";
-                    break;
-
-                case ControllerType.PS4:
-                    freeLookCamera.m_XAxis.m_InputAxisName = "Right Stick Horizontal Mac PS4";
-	        	    freeLookCamera.m_YAxis.m_InputAxisName = "Right Stick Vertical Mac PS4";
-                    break;
-            }
-#endif
+            freeLookCamera.m_XAxis.m_InputAxisName = "Right Stick Horizontal " + osType + " " + controllerType;
+            freeLookCamera.m_YAxis.m_InputAxisName = "Right Stick Vertical " + osType + " " + controllerType;
         }
     }
 }
